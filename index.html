@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>George's Schedule Machine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="scheduler.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="scheduler.js"></script>
+</head>
+<body>
+<div class="page">
+    <h1>George's Schedule Machine</h1>
+    <p class="protip"><i>Designed for use by IMSA students. Best if used on a desktop browser.</i></p>
+    <div class="section">
+        <p>Powerschool Schedule doesn't make sense? Or maybe it's just too ugly. In any case, this schedule machine is
+            here to help!</p>
+        <p>Use the Fancy Auto-Scheduler or the Schedule Commander below to enter your classes and watch your schedule
+            automagically appear!</p>
+        <p>When you're done, you can hit "Print" to open a formatted view of your schedule for printing and
+            screenshotting.</p>
+    </div>
+    <p class="protip"><i><b>That's pretty neat!</b> The Schedule Machine was first developed over the summer of 2014 as
+        a bulk-input schedule visualizer. This is its 4rd iteration. Though it's changed in looks, its
+        goal is the same: make schedule-sharing easy and fun!</i></p>
+    <h2>Fancy Auto-Scheduler</h2>
+    <p class="protip protip-green"><b>This feature is experimental.</b> Copy and paste the entire semester table
+        from PowerSchool into this text area. The sections should be separated by tabs, and each class should be
+        on a new row. Then hit "Update"&ndash;The Schedule Machine will try to do the scheduling for you.<b> Be
+            sure to check that it's correct!</b></p>
+    <div class="protip protip-yellow">
+        <p><b>Known bugs:</b></p>
+        <ul>
+            <li>Empty lines in your schedule (such as at the end), will result in an error, but the scheduler still
+                works
+                nonetheless. Scroll down and take a look!
+            </li>
+            <li>PowerSchool's table can sometimes have quirks. If there are mistakes, you can edit the classes with the
+                Schedule Commander below. You can also use it to change the colors!
+            </li>
+        </ul>
+    </div>
+    <div class="section">
+        <div class="mdl-grid">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+        <textarea class="mdl-textfield__input" type="text" rows="8" id="powerschool-entry"
+                  name="powerschool"></textarea>
+                <label class="mdl-textfield__label" for="powerschool-entry">Awaiting PowerSchool Schedule...</label>
+            </div>
+        </div>
+        <button id="auto-button" onClick="autoSchedule()"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Update
+        </button>
+        <p style="display: inline-block;"><i id="auto-success">Success.</i><span
+                id="auto-messages"></span></p>
+    </div>
+
+
+    <div class="page-section">
+        <h2>Schedule Commander</h2>
+        <p class="protip protip-green"><i><b>Protip:</b> You can click on classes in the table to edit them
+            here.</i></p>
+        <p class="protip protip-yellow"><i><b>Note:</b> I-day MSI might not follow the usual mod times, but for the
+            sake of visualization, use the first block on I-day for the first MSI class, and the second one for the
+            second class.</i></p>
+        <div id="schedule-command" class="section mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col mdl-grid">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                    <input class="mdl-textfield__input" type="text" id="class-name" name="classname">
+                    <label class="mdl-textfield__label" for="class-name">Course Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                    <input class="mdl-textfield__input" type="text" id="teacher-name" name="teacher">
+                    <label class="mdl-textfield__label" for="teacher-name">Teacher Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                    <input class="mdl-textfield__input" type="text" id="room-name" name="room">
+                    <label class="mdl-textfield__label" for="room-name">Room Number</label>
+                </div>
+                <!-- There is no official MDL selector, so need to find a working and nice element for this. -->
+                <div class="mdl-cell mdl-cell--12-col">
+                    <label for="label-color">Label Color</label>
+                    <select id="label-color" class="u-full-width">
+                        <option value="red">Red</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                        <option value="purple">Purple</option>
+                        <option value="pink">Pink</option>
+                        <option value="brown">Brown</option>
+                        <option value="cyan">Cyan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <p><b>Mods and Days</b></p>
+                    <table id="mod-entry">
+                        <tr>
+                            <th style="border: none"></th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>I/E</th>
+                            <th>C</th>
+                            <th>D</th>
+                        </tr>
+                        <tr>
+                            <td class="mod">1</td>
+                            <td></td>
+                            <td></td>
+                            <td rowspan="2"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">2</td>
+                            <td></td>
+                            <td></td>
+                            <td class="nodisplay"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">3</td>
+                            <td></td>
+                            <td></td>
+                            <td rowspan="2"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">4</td>
+                            <td></td>
+                            <td></td>
+                            <td class="nodisplay"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">5</td>
+                            <td></td>
+                            <td></td>
+                            <td rowspan="4" class="noclass"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">6</td>
+                            <td></td>
+                            <td></td>
+                            <td class="nodisplay"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">7</td>
+                            <td></td>
+                            <td></td>
+                            <td class="nodisplay"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="mod">8</td>
+                            <td></td>
+                            <td></td>
+                            <td class="nodisplay"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
+                <button id="submit-button"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                        onClick="updateSchedule()">
+                    Update
+                </button>
+                <button id="reset-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        onClick="resetScheduleCommand()">
+                    Reset Commander
+                </button>
+                <p style="display: inline-block;"><i id="success">Success.</i><span
+                        id="messages"></span></p>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h2>Your Schedule</h2>
+        <div id="areaToPrint" class="section">
+            <table id="schedule">
+                <colgroup>
+                    <col id="blocks"/>
+                    <col id="A"/>
+                    <col id="B"/>
+                    <col id="I"/>
+                    <col id="C"/>
+                    <col id="D"/>
+                </colgroup>
+                <tr>
+                    <th class="mods top">Mod</th>
+                    <th class="top">A</th>
+                    <th class="top">B</th>
+                    <th class="top">I</th>
+                    <th class="top">C</th>
+                    <th class="top">D</th>
+                </tr>
+                <tr>
+                    <th class="mods">1<br/>8:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="msi" rowspan="2"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">2<br/>9:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="nodisplay"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">3<br/>10:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="msi" rowspan="2"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">4<br/>11:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="nodisplay"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">5<br/>12:20PM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="msi noclass" rowspan="4"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">6<br/>1:20PM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="nodisplay"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">7<br/>2:20PM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="nodisplay"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="mods">8<br/>3:20PM</th>
+                    <td></td>
+                    <td></td>
+                    <td class="nodisplay"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <button id="print-button"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                onClick="printDiv()">
+            Print
+        </button>
+        <br><br>
+        <p class="protip protip-green"><i><b>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b>
+            This fights glitches, too!</i></p>
+        <p class="protip protip-green"><i><b>Protip:</b> If all you get are borders when you print, try clicking on
+            "More Settings" and enabling background graphics. If you only get black and white, try printing with your
+            system print dialog.</i></p>
+    </div>
+    <p id="legal">George's Schedule Machine v4.0. Copyright &copy; 2018 <a href="https://george.moe">George Moe</a></p>
+</div>
+</body>
+</html>

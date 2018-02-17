@@ -1,0 +1,179 @@
+.page {
+    padding: 16px;
+}
+
+.protip {
+    margin: 0;
+    margin-bottom: 1rem;
+    height: auto;
+    background-color: rgb(220, 220, 220);
+    color: rgb(80, 80, 80);
+    border-radius: 2px;
+    padding: 12px;
+}
+
+.protip.protip-green {
+    background-color: rgba(0, 182, 57, 0.3);
+    color: rgb(0, 100, 57);
+}
+
+.protip.protip-yellow {
+    background-color: rgba(227, 182, 0, 0.3);
+    color: rgb(128, 100, 0);
+}
+
+#schedule {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 4px;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+#schedule span.text {
+    vertical-align: center;
+}
+
+#schedule span.text p {
+    margin: 0;
+}
+
+#blocks {
+    width: 5em;
+}
+
+#schedule td, #schedule th {
+    border-radius: 0;
+    height: 4.5em;
+    max-height: 5em;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: white;
+    text-align: center;
+}
+
+#schedule th {
+    background-color: rgb(18, 89, 201);
+    color: white;
+}
+
+#schedule th:first-child {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#schedule th.mods {
+    background-color: rgb(20, 20, 20);
+}
+
+#schedule td {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(200, 200, 200);
+}
+
+#schedule td p {
+    line-height: 1.2em;
+}
+
+#schedule td:not(.mod) {
+    padding: 0;
+}
+
+#schedule th.top {
+    height: 3em;
+}
+
+#mod-entry {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 2px;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+#mod-entry th, td {
+    font-weight: normal;
+    font-family: "Roboto", Arial, sans-serif;
+    color: black;
+    border: 1px solid black;
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 0;
+    padding: 0;
+}
+
+#mod-entry td:not(.selected):not(.mod):not(.noclass):hover {
+    background-color: rgba(0, 182, 57, 0.3);
+}
+
+#mod-entry .noclass {
+    background-color: rgb(240, 240, 240);
+}
+
+#mod-entry td.selected {
+    background-color: rgb(0, 182, 57);
+}
+
+#mod-entry td.selected:hover {
+    background-color: rgba(255, 62, 62, 0.3);
+}
+
+input {
+    font-size: 1.2em;
+}
+
+.section {
+    border: 1px solid rgb(200, 200, 200);
+    padding: 16px;
+    margin: 24px 0;
+}
+
+#color-label {
+    vertical-align: middle;
+}
+
+.form-container {
+    margin: 1%;
+    padding: 1%;
+}
+
+.page-section {
+    margin: 2% 0;
+}
+
+#success, #auto-success {
+    color: rgb(0, 147, 59);
+}
+
+#fail, #success, #messages, #auto-success, #auto-messages {
+    opacity: 0;
+}
+
+#iday-warning {
+    opacity: 0;
+    color: #DEB928;
+    background-color: #F2DA77;
+    border: 1px solid #DEB928;
+    border-radius: 2px;
+    font-size: 12pt;
+}
+
+.nodisplay {
+    display: none;
+}
+
+#submit-button, #auto-button, #print-button, #reset-button {
+    font-size: 12pt;
+    font-weight: 300;
+}
+
+#legal {
+    width: 100%;
+    font-size: 0.8rem;
+    text-align: center;
+}

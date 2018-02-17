@@ -1,0 +1,81 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+#schedule
+{
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: 3.75pt;
+        width: 100%;
+	height: 100%;
+	background-color: white;
+	text-align: center;
+	font-size: 11pt;
+}
+
+#schedule span.text
+{
+	veritcal-align: center;
+}
+
+#schedule span.text p
+{
+        margin: 0;
+}
+
+#blocks
+{
+	width: 5em;
+}
+
+#schedule td, #schedule th
+{
+	border-radius: 0px;
+	height: 4.5em;
+	max-height: 5em;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+        color: white;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+}
+
+#schedule th
+{
+	background-color: rgb(18, 89, 201);
+	color: white;
+}
+
+#schedule th.mods
+{
+        background-color: rgb(20,20,20);
+}
+
+#schedule td
+{
+        background-color: rgb(240, 240, 240);
+        border: 1px solid rgb(200, 200, 200);
+}
+
+#schedule td p
+{
+	line-height: 1.2em;
+}
+
+#schedule td:not(.mod)
+{
+	padding: 0;
+}
+
+#schedule th.top
+{
+        height: 36pt;
+}
+		
+.nodisplay
+{
+	display: none;
+}
+		
