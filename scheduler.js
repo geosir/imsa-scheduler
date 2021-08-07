@@ -171,9 +171,13 @@ $(document).ready(function () {
             // Get data from the PowerSchool textfield. Split by line, and tokenize lines by tabs.
             var powerschool = $("#powerschool-entry").val();
             powerschool = powerschool.split("\n");
+            // filter out lines that do not start with numbers as they cannot possibly be valid expressions.
+            // this allows headers to be pasted.
+            powerschool = powerschool.filter((entry) => {
+               return !isNaN(entry[0]);
+            })
             powerschool = powerschool.map(function (entry) {
-                console.log(entry)
-                return entry.split("\t")
+                return entry.split("\t");
             });
 
             // Process each line in the PowerSchool schedule
