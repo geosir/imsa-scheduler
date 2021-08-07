@@ -172,6 +172,7 @@ $(document).ready(function () {
             var powerschool = $("#powerschool-entry").val();
             powerschool = powerschool.split("\n");
             powerschool = powerschool.map(function (entry) {
+                console.log(entry)
                 return entry.split("\t")
             });
 
@@ -271,7 +272,7 @@ $(document).ready(function () {
         } catch (e) {
             // An error occurred?? Of course. Show a message.
             var $autoMessages = $("#auto-messages");
-            html("An error occured. Please let George know what happened: <a href=\"mailto:george@george.moe\" target=\"_blank\">george@george.moe</a>.");
+            $autoMessages.html("An error occured. Please let George know what happened: <a href=\"mailto:george@george.moe\" target=\"_blank\">george@george.moe</a>.");
             $autoMessages.css("opacity", 1);
             $autoMessages.delay(5000).animate({opacity: 0}, 2000);
             console.log(e);
