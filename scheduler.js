@@ -1,13 +1,8 @@
 // Get data from URL parameters
 // Used for parsing schedules from URLs (this feature...is under development ;) )
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+function getParameterByName(name) {
+    const urlParams = new URLSearchParams(window.location.search); 
+    return urlParams.get(name);
 }
 
 // Make these functions available to the DOM
@@ -171,8 +166,13 @@ $(document).ready(function () {
             // Get data from the PowerSchool textfield. Split by line, and tokenize lines by tabs.
             var powerschool = $("#powerschool-entry").val();
             powerschool = powerschool.split("\n");
+            // filter out lines that do not start with numbers as they cannot possibly be valid expressions.
+            // this allows headers to be pasted.
+            powerschool = powerschool.filter((entry) => {
+               return !isNaN(entry[0]);
+            })
             powerschool = powerschool.map(function (entry) {
-                return entry.split("\t")
+                return entry.split("\t");
             });
 
             // Process each line in the PowerSchool schedule
@@ -271,7 +271,7 @@ $(document).ready(function () {
         } catch (e) {
             // An error occurred?? Of course. Show a message.
             var $autoMessages = $("#auto-messages");
-            html("An error occured. Please let George know what happened: <a href=\"mailto:george@george.moe\" target=\"_blank\">george@george.moe</a>.");
+            $autoMessages.html("An error occured. Please let George know what happened: <a href=\"mailto:george@george.moe\" target=\"_blank\">george@george.moe</a>.");
             $autoMessages.css("opacity", 1);
             $autoMessages.delay(5000).animate({opacity: 0}, 2000);
             console.log(e);
