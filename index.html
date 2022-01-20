@@ -10,11 +10,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="scheduler.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59C89V0VCX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-59C89V0VCX');
+    </script>
 </head>
 <body>
 <div class="page">
     <h1>George's Schedule Machine</h1>
     <p class="protip"><i>Designed for use by IMSA students. Best if used on a desktop browser.</i></p>
+    <p class="protip"><i><b>That's pretty neat!</b> This schedule machine began way back in 2014. It's been through a
+        couple of versions as IMSA schedules have changed. <b>You can help keep it up to date!</b> <a
+                href="https://github.com/geosir/imsa-scheduler">Contribute to the project on GitHub.</a></i></p>
     <div class="section">
         <p>Powerschool Schedule doesn't make sense? Or maybe it's just too ugly. In any case, this schedule machine is
             here to help!</p>
@@ -23,20 +39,15 @@
         <p>When you're done, you can hit "Print" to open a formatted view of your schedule for printing and
             screenshotting.</p>
     </div>
-    <p class="protip"><i><b>That's pretty neat!</b> The Schedule Machine was first developed over the summer of 2014 as
-        a bulk-input schedule visualizer. This is its 4th iteration. Though it's changed in looks, its
-        goal is the same: make schedule-sharing easy and fun!</i></p>
     <h2>Fancy Auto-Scheduler</h2>
-    <p class="protip protip-green"><b>This feature is experimental.</b> Copy and paste the entire semester table
-        from PowerSchool into this text area. The sections should be separated by tabs, and each class should be
-        on a new row. Then hit "Update"&ndash;The Schedule Machine will try to do the scheduling for you.<b> Be
-            sure to check that it's correct!</b></p>
+    <p class="protip protip-green">Copy and paste the entire semester table from PowerSchool into this text area. The
+        sections should be separated by tabs, and each class should be on a new row. Then hit "Update"&mdash;The
+        Schedule Machine will try to do the scheduling for you.<b> Be sure to check that it's correct!</b></p>
     <div class="protip protip-yellow">
         <p><b>Known bugs:</b></p>
         <ul>
             <li>Empty lines in your schedule (such as at the end), will result in an error, but the scheduler still
-                works
-                nonetheless. Scroll down and take a look!
+                works nonetheless. Scroll down and take a look!
             </li>
             <li>PowerSchool's table can sometimes have quirks. If there are mistakes, you can edit the classes with the
                 Schedule Commander below. You can also use it to change the colors!
@@ -288,7 +299,13 @@
             "More Settings" and enabling background graphics. If you only get black and white, try printing with your
             system print dialog.</i></p>
     </div>
-    <p id="legal">George's Schedule Machine v4.1. Copyright &copy; 2018-2022 <a href="https://george.moe">George Moe</a> and <a href="https://devksingh.com">Dev Singh</a></p>
+    <p id="legal">
+        George's Schedule Machine v4.0.<br/>
+        Copyright &copy; 2014-2018 <a href="https://george.moe">George Moe</a><br/>
+        Copyright &copy; 2022 <a href="contributors.html">George's Schedule Machine Contributors</a><br/>
+        <a href="https://github.com/geosir/imsa-scheduler/blob/master/LICENSE">MIT License</a> - <a
+            href="https://github.com/geosir/imsa-scheduler">GitHub</a>
+    </p>
 </div>
 </body>
 </html>
